@@ -1,3 +1,2 @@
 # TALLER2
-TALLER 2
-WEB
+[Sitio web](https://franciscomeneses.github.io/TALLER2/)

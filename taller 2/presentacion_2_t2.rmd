@@ -1,0 +1,182 @@
+---
+title: "tesis"
+author: "francisco meneses"
+date: "24-10-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cargar librerías
+```{r}
+pacman::p_load(lme4,
+               reghelper,
+               haven,
+               descr,
+               stargazer,
+               ggplot2, # gr?ficos
+               dplyr, # manipulacion de datos
+               texreg, # tablas lme4
+               sjPlot #graficos
+)
+```
+
+
+
+```{r}
+iccssimce <- read_dta("iccs_simce.dta")
+```
+
+
+```{r}
+data <- iccssimce %>% select("p.leng"=ptje_lect8b_alu, "p.mat"=ptje_mate8b_alu, "p.nat"=ptje_nat8b_alu, "p.civ"=PV1CIV, "nse"=S_NISB, "ip_estudiante"=S_SINT, "ip_padres"=S_HINT,idschool,apert_disc=S_OPDISC, "cult_part"=S_VALPARTS, esp_part=C_ENGAGE , "Libros"=S_HOMLIT, "Ocupacion" = S_HISEI, "Educacion"=S_HISCED, IC3G13A, rel_prof=S_STUTREL, S_ABUSE) %>% as.data.frame()
+data = na.omit(data)
+
+
+data$Libros<-ifelse(data$Libros>=2,1,0)
+data$IC3G13A<-ifelse(data$IC3G13A==2,1,0)
+data$ip_padres<-ifelse(data$ip_padres>=2,1,0)
+data$Educacion<-ifelse(data$Educacion>=3,1,0)
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_nse = mean(nse))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_apert_disc = mean(apert_disc))
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(clima_prof = mean(rel_prof))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_esp_part = mean(esp_part))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_ip_estudiante = mean(ip_estudiante))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(sd_nse = sd(nse))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_ip_padres = mean(ip_padres))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_cult_part = mean(cult_part))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_p.leng = mean(p.leng))
+```
+
+```{r}
+summary(data)
+hist(data$sd_nse)
+sd(data$p.civ)
+  
+```
+
+
+```{r}
+results_1 = lmer(p.civ ~ 1 + Libros +  Ocupacion + Educacion + ip_padres +  (1 | idschool), data = data, REML=F)
+screenreg(results_1)
+```
+
+```{r}
+results_2 = lmer(p.civ ~ 1 + Libros +  Ocupacion + ip_padres + Educacion + p.leng + (1 | idschool), data = data, REML=F)
+screenreg(results_2)
+```
+
+```{r}
+results_3 = lmer(p.civ ~ 1 + Libros +  Ocupacion + ip_padres + Educacion + p.leng + (1 + p.leng| idschool), data = data, REML=F) 
+screenreg(results_3)
+```
+```{r}
+anova(results_2,results_3)
+```
+
+```{r}
+results_4 = lmer(p.civ ~ 1 + Libros +  Ocupacion + ip_padres + Educacion + p.leng + (1 + p.leng| idschool), data = data, REML=F) 
+screenreg(results_4)
+```
+```{r}
+anova(results_3,results_4)
+```
+
+
+
+```{r}
+results_5 = lmer(p.civ ~ 1 + ip_padres + p.leng + nse + m_ip_padres + m_ip_estudiante + cult_part (1 + p.leng| idschool), data = data, REML=F) 
+screenreg(results_5)
+```
+
+```{r}
+results_6 = lmer(p.civ ~ 1 + Libros +  Ocupacion + ip_padres + Educacion + p.leng*m_nse + m_ip_padres + m_ip_estudiante + (1 + p.leng| idschool), data = data, REML=F) 
+
+```
+
+
+
+```{r}
+hist(data$m_ip_padres)
+```
+
+
+hacer un indicador que solo tome a los que tienen mas del 80%. 
+
+
+```{r}
+screenreg(list(results_1,results_2,results_3, results_6), type="text")
+```
+
+los padres con interes por la politica eligen colegios que probablemente tengan ciertas practicas politicas y de buena calidad. 
+
+
+#grafico de la interaccion. el efecto del lenguaje 
+```{r}
+plot_model(results_5, type = "int")
+plot_model(results_6, type = "int")
+```
+
+correlacion entre interes de de los padres y cualidades democraticas del colegio. 
+```{r}
+
+library(corrplot)
+basecor<-select(data, m_ip_padres, m_cult_part, m_apert_disc, m_esp_part,m_nse )
+
+cor <- cor(basecor)
+  corrplot.mixed(cor)
+```
+
+
+```{r}
+
+data$p.leng_centrado <- (data$p.leng - data$m_p.leng)
+
+results_sincentrado = lmer(p.civ ~ 1 + ip_padres + p.leng + nse + m_ip_padres + m_ip_estudiante + cult_part + (1 + p.leng| idschool), data = data, REML=F) 
+
+results_concentrado = lmer(p.civ ~ 1 + ip_padres + p.leng_centrado + nse + m_ip_padres + m_ip_estudiante + cult_part + (1 + p.leng_centrado| idschool), data = data, REML=F) 
+
+results_concentrado_interaccion = lmer(p.civ ~ 1 + ip_padres + p.leng_centrado*nse + m_ip_padres + m_ip_estudiante  + (1 + p.leng_centrado| idschool), data = data, REML=F) 
+
+screenreg(list(results_sincentrado, results_concentrado,results_concentrado_interaccion ), type="text")
+
+
+
+
+```
+
+
+```{r}
+results_5 = lmer(p.civ ~ 1 + ip_padres + nse*p.leng_centrado  + m_p.leng + m_ip_padres + m_ip_estudiante + (1 + nse| idschool), data = data, REML=F) 
+
+plot_model(results_5, type = "int")
+```
+

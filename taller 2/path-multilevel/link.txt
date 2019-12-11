@@ -1,0 +1,18 @@
+https://users.ugent.be/~yrosseel/lavaan/zurich2017/MULTILEVEL/lavaan_multilevel_zurich2017.pdf 
+
+model <- '
+level: 1
+fw =˜ y1 + y2 + y3 + y4
+fw ˜ x1 + x2
+level: 2
+fb =˜ y1 + y2 + y3 + y4
+# optional
+y1 ˜˜ 0*y1
+y2 ˜˜ 0*y2
+y3 ˜˜ 0*y3
+y4 ˜˜ 0*y4
+fb ˜ w
+'
+fit <- sem(model, data = Data,
+cluster = "clus",
+fixed.x = FALSE)

@@ -1,0 +1,102 @@
+---
+title: "pathmulti"
+author: "francisco meneses"
+date: "17-10-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+pacman::p_load(lme4,psych,
+               semPlot,
+               haven,
+               stargazer,
+               ggplot2, # gr?ficos
+               dplyr, # manipulacion de datos
+               texreg, broom, car, lmtest, multiwayvcov, tidyverse, lavaan)
+
+```
+
+
+```{r}
+iccssimce <- read_dta("iccs_simce.dta")
+```
+
+```{r}
+data <- iccssimce %>% select("p.leng"=ptje_lect8b_alu, "p.mat"=ptje_mate8b_alu, "p.nat"=ptje_nat8b_alu, "p.civ"=PV1CIV, "nse"=S_NISB, "int_pol_es"=S_SINT, "ip_padres"=S_HINT,idschool, "cult_part"=S_VALPARTS) %>% as.data.frame()
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_nse = mean(nse))
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_cult_part = mean(cult_part))
+
+
+data <- data %>%
+  group_by(idschool) %>%
+  mutate(m_p.leng = mean(p.leng))
+
+
+```
+
+
+
+```{r}
+
+#el alto nivel de los padres hace que tengan mejor comprension lectora, lo que lleva a más conocimiento civico y a mas interes. 
+
+model <- '
+level: 1
+
+p.civ ~ int_pol_es + p.leng + nse
+int_pol_es ~ ip_padres
+ip_padres ~ nse
+p.leng ~ nse
+p.leng ~~  int_pol_es
+
+level: 2
+p.civ ~ m_nse
+
+'
+fit <- sem(model, data = data,
+cluster = "idschool",
+fixed.x = FALSE)
+
+summary(fit)
+modificationindices(fit)
+
+```
+
+```{r}
+
+#el alto nivel de los padres hace que tengan mejor comprension lectora, lo que lleva a más conocimiento civico y a mas interes. 
+
+model <- '
+level: 1
+
+p.civ ~ int_pol_es + p.leng + nse
+int_pol_es ~ ip_padres*m_cult_part + ip_padres
+ip_padres ~ nse
+p.leng ~ nse*m_p.leng
+p.leng ~~  int_pol_es
+
+level: 2
+p.civ ~ m_nse
+
+'
+fit <- sem(model, data = data,
+cluster = "idschool",
+fixed.x = FALSE)
+
+summary(fit)
+modificationindices(fit)
+
+```
+
+

@@ -1,0 +1,25 @@
+---
+title: "Example"
+author: "Author"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: 
+        - default
+        - default-fonts
+        - custom.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+## Change bullet point colour
+
+* An item
+* Another item

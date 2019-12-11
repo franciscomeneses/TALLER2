@@ -1,0 +1,51 @@
+---
+title: "El rol de la familia y la escuela en la socialización política de la tolerancia en escolares chilenos."
+subtitle: "Primer avance: Taller de investigación II"
+author: "Anais Herrera Leigthon"
+date: "22 de septiembre de 2019"
+output: 
+  html_document:
+     theme: flatly
+     highlight: tango
+     toc: true
+     toc_float: true
+     toc_depth: 2
+     number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Introducción
+<div style="text-align: justify">
+La igualdad de derechos es uno de los principios fundamentales de todo sistema democrático, pudiéndose establecer como un punto de partida y un objetivo de estos (Vila, 2008). Sin embargo, las democracias americanas aún presentan grandes desafíos en términos de la inclusión de grupos sociales subalternos, lo que se expresa en la mantención de desigualdades sociales, políticas y económicas (Burchardt, 2008) y en el aumento, en los últimos años, de los delitos de odio por motivos de sexo, religión, orientación sexual y otras condiciones sociales (Organización de los Estados Americanos, 2013). En este contexto se vuelve relevante analizar los factores que inciden en el proceso de socialización política de las actitudes de los ciudadanos hacia la igualdad de derechos. Teniendo en cuenta que la escuela es un agente de socialización en que el Estado tiene cierta capacidad de injerencia, enfocar el análisis en jóvenes en edad escolar puede permitir comprender por qué se generan diferencias en las predisposiciones a la tolerancia a grupos desfavorecidos y diseñar políticas que ayuden a prevenir la discriminación.
+<div/>
+<div style="text-align: justify">
+Desde los orígenes de la sociología los procesos de socialización han sido un tema de interés (e.g. Durkheim, 1974), por lo que diversos estudios ya se han preguntado sobre los factores que influyen en la socialización de la tolerancia entre los jóvenes. En esta línea de investigación se ha evidenciado que, en escolares de octavo grado, el nivel socioeconómico de los padres (Miranda, Castillo & Cumsille, 2018) y variables contextuales de la escuela como el clima escolar y la percepción de los estudiantes sobre la apertura a la discusión en el aula (Caro & Schulz, 2012) poseen un efecto positivo sobre la tolerancia. Empero, no se han incorporado ambas teorías en un modelo que evalúe si características de la escuela poseen un efecto capaz de moderar las desigualdades producidas por las diferencias entre los niveles socioeconómicos de los padres. Por un lado, el estudio de Miranda et al. (2018) utiliza ecuaciones estructurales y modelos multinivel para evaluar la transmisión intergeneracional de la socialización política en la tolerancia hacia grupos tradicionalmente desfavorecidos (a partir de tres proxys del nivel socioeconómico de la familia: cantidad de libros en el hogar, nivel educativo más alto entre los padres y estatus ocupacional más alto entre los padres), además de incorporar dos características individuales (i.e. género y antecedentes migratorios) como variables de control. Si bien esta investigación constituye un gran aporte al conocimiento, posee como limitación el no incorporar variables que permitan analizar el rol de la escuela en la socialización política de la tolerancia. Por otro lado, el estudio de Caro y Schulz (2012) si incorpora variables de esta índole, generando evidencia del efecto que poseen sobre la actitud hacia la tolerancia a grupos subalternos en general. No obstante, este estudio no utiliza ecuaciones de senderos estructurales ni análisis factorial, sino que utiliza como proxy de la tolerancia una escala sobre la preferencia de los estudiantes hacia la diversidad en su vecindario de grupos tradicionalmente discriminados. Aunque este trabajo presenta una evidencia de fiabilidad por consistencia interna aceptable (${\alpha}$ = 0.82), no explicita si utiliza el Alpha de Cronbach ordinal (de no utilizarlo el valor indicado no estaría representando una evidencia de fiabilidad) ni presenta evidencias de validez del constructo, por lo que no es posible afirmar con seguridad que la escala está midiendo lo que dice representar. A lo que se suma que la validez de un constructo se debe evaluar en cada contexto (Prieto y Delgado, 2010), pero dicho proceso no se realiza en este estudio. Por consiguiente, se hace necesario un estudio que aporte evidencias sobre la dimensionalidad del constructo e incorpore como variables independientes indicadores del nivel socioeconómico de la familia y características de la escuela, para indagar en la propuesta de Caro y Schultz (2012) respecto a la existencia de una variable latente (disposición general a la tolerancia) y evaluar si características de la escuela son capaces de moderar el efecto del nivel socioeconómico sobre la tolerancia. Una investigación con estas cualidades podría permitir comprender la capacidad que tienen las escuelas para disminuir la desigualdad provocada por la transmisión intergeneracional de las actitudes a la tolerancia y dar luces sobre características que se podrían mejorar o potenciar en colegios de menores recursos para prevenir las actitudes discriminadoras.
+<div/>
+<div style="text-align: justify">
+La presente propuesta de investigación busca responder a estas inquietudes, 
+<div/>
+#Conceptos y evidencia
+#Datos, variables y métodos
+##Variables dependientes
+
+#Referencias bibliográficas
+Burchardt, H. (2008). Desigualdad y democracia. *Nueva Sociedad (215)*, pp. 79-94.  
+<div style="text-align: justify">
+Caro, D. H., & Schulz, W. (2012). Ten Hypotheses about Tolerance toward Minorities among Latin American Adolescents. *Citizenship, Social and Economics Education, 11*(3), 213-234. doi:10.2304/csee.2012.11.3.213 <div/>
+<div style="text-align: justify">
+Durkheim, E. (1974). *Educación y sociología*. Buenos Aires: Shapire. 
+<div/>
+<div style="text-align: justify">
+Miranda, D., Castillo, J., & Cumsille, P. (2018). The Political Socialization of Attitudes Toward Equal Rights from a Comparative Perspective. En Sandoval-Hernández, A., Isac, M., & Miranda, D. (Eds.). *Teaching Tolerance in a Globalized World* (pp. 103-124). International Association for the Evaluation of Educational Achievement (IEA). 
+<div/>
+<div style="text-align: justify">
+Organización de los Estados Americanos (OEA). (2013). *CONVENCIÓN INTERAMERICANA CONTRA TODA FORMA DE DISCRIMINACIÓN E INTOLERANCIA.* Revisado el 18 de septiembre, 2019, en: http://www.oas.org/es/sla/ddi/docs/tratados_multilaterales_interamericanos_A-69_discriminacion_intolerancia.pdf 
+<div/>
+<div style="text-align: justify">
+Prieto, G. & Delgado, A. (2010). FIABILIDAD Y VALIDEZ. *Papeles del Psicólogo, 31*(1), 67-74. ISSN: 0214-7823. Revisado el 18 de septiembre, 2019, en: http://www.redalyc.org/articulo.oa?id=77812441007
+<div/>
+<div style="text-align: justify">
+Vila, B. (2008). La formación del ciudadano, un camino hacia la democracia participativa. *Revista comunicación y hombre,* (4). Revisado el 6 de junio, 2019, en: http://dx.doi.org/10.32466/eufv-cyh.2008.4.101.55-70 
+<div/>
